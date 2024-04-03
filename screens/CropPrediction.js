@@ -15,19 +15,19 @@ export default function CropPrediction() {
     // const [hum, setHum] = useState('');
     // const [ph, setPH] = useState('');
     // const [option, setOption] = useState(null)
-    // const cal1 = () => {
-    //     fetch('https://thingspeak.com/channels/2222536/fields/1/last.json')
-    //         .then(response => response.json())
-    //         .then(json => setTemp(json.field1))
-    //         .catch(error => console.error(error));
-    // };
+    const cal1 = () => {
+        fetch('https://thingspeak.com/channels/2222536/fields/1/last.json')
+            .then(response => response.json())
+            .then(json => setTemp(json.field1))
+            .catch(error => console.error(error));
+    };
 
-    // const cal2 = () => {
-    //     fetch('https://thingspeak.com/channels/2222536/fields/3/last.json')
-    //         .then(response => response.json())
-    //         .then(json => setHum(json.field3))
-    //         .catch(error => console.error(error));
-    // };
+    const cal2 = () => {
+        fetch('https://thingspeak.com/channels/2222536/fields/3/last.json')
+            .then(response => response.json())
+            .then(json => setHum(json.field3))
+            .catch(error => console.error(error));
+    };
 
     const apiCall = () => {
         fetch("https://flask-web-app-as4r.onrender.com/prediction", {
@@ -55,7 +55,10 @@ export default function CropPrediction() {
                 throw error;
             });
     };
-
+    useEffect(() => {
+        cal1()
+        cal2()
+    });
     const styles = StyleSheet.create({
         // container: {
         //     flex: 1,
@@ -126,10 +129,10 @@ export default function CropPrediction() {
         //<ImageBackground source={require('../background.jpg')} style={styles.background}>
         <View style={styles.outerbox}>
             <View style={styles.midbox}>
-                <Text style={{ fontSize: 50, color: '#b5ffcb', fontWeight: 'bold' , marginBottom: 20 }}>Crop Prediction</Text>
+                <Text style={{ fontSize: 50, color: '#b5ffcb', fontWeight: 'bold', marginBottom: 20 }}>Crop Prediction</Text>
                 <Text style={styles.text}>Enter the input</Text>
                 <View style={styles.innerbox}>
-                    <Text style={styles.text}>N:{}{"\t\t\t"+n}</Text>
+                    <Text style={styles.text}>N:</Text>
                     <TextInput
                         onChangeText={setN}
                         style={styles.input}
@@ -137,7 +140,7 @@ export default function CropPrediction() {
                     />
                 </View>
                 <View style={styles.innerbox}>
-                    <Text style={styles.text}>P: {"\t\t\t"+p}</Text>
+                    <Text style={styles.text}>P:</Text>
                     <TextInput
                         onChangeText={setP}
                         style={styles.input}
@@ -145,7 +148,7 @@ export default function CropPrediction() {
                     />
                 </View>
                 <View style={styles.innerbox}>
-                    <Text style={styles.text}>K: {"\t\t\t"+k}</Text>
+                    <Text style={styles.text}>K:</Text>
                     <TextInput
                         onChangeText={setK}
                         style={styles.input}
@@ -153,15 +156,15 @@ export default function CropPrediction() {
                     />
                 </View>
                 <View style={styles.innerbox}>
-                    <Text style={styles.text}>ph: {"\t"+ph}</Text>
+                    <Text style={styles.text}>ph:</Text>
                     <TextInput
                         onChangeText={setPH}
                         style={styles.input}
                         placeholder='pH value'
                     />
                 </View>
-                <Text style={styles.text}>Temperature: {"\t\t\t"+temp}</Text>
-                <Text style={styles.text}>Humidity: {"\t\t\t"+hum}</Text>
+                <Text style={styles.text}>Temperature: {"\t\t\t" + temp}</Text>
+                <Text style={styles.text}>Humidity: {"\t\t\t" + hum}</Text>
             </View>
 
 
