@@ -10,7 +10,6 @@ export default function OptionScreen({ navigation }) {
     console.log("hello")
     return (
         <SafeAreaView>
-            <Text>Hi</Text>
             <View style={styles.buttonWrapper}>
                 <NextButton
                     title={'Crop Prediction'}
